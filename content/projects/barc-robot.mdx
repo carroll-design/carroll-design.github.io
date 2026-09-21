@@ -1,0 +1,175 @@
+---
+title: Quadrupedal Walking Robot
+slug: barc-robot
+period: { start: "2026-03" }
+summary: designed and fabricated a radio-controller quadrupedal walking robot.
+cardSkills: [Mechanical Design, CAD, Fabrication, Design Iteration, Testing & Validation, •••]
+skills: [Mechanical Design, CAD, Systems Engineering, Design Iteration, Fabrication, 3D-Printing, Technical Research, Technical Documentation, Testing & Validation]
+origin: independent
+tier: project
+order: 4
+featured: true
+detail: true
+coverImage: "/images/projects/barc-robot/robot-cleaned.webp"
+---
+
+## Overview
+
+Worked with a team to design and fabricate a radio-controlled quadrupedal walker for a course in mechanical design. 
+
+## Design - Mk 0.0
+
+The requirements for this project were to build an original robot with at least four legs that could walk forward, backward, and be able to turn. It was also clarified that the robot must be able to perform a demonstration of each of these movements, and no one was allowed to interact physically with the robot while it did so.
+
+I was very excited about this project, and once I knew the requirements I went straight to sketching out different concepts and researching what others had done for similar projects. Through my research, I happened across a design that used a centrally located shaft to drive all four legs simultaneously. I found this design very interesting, and wanted to incorporate it into the robot.
+
+Taking what I had seen in this design, I sketched out what the robot could look like, and how the drivetrain would function.
+
+<div className="my-8 grid gap-4 md:grid-cols-2">
+  <ProjectPhoto
+    src="/images/projects/barc-robot/mk0.0-cleaned.webp"
+    alt="Walking robot mk 0.0 design"
+    caption="B.A.R.C. Mk 0.0 Body Design"
+    className="mx-auto max-w-[400px]"
+  />
+  <ProjectPhoto
+    src="/images/projects/barc-robot/mk0.0-drivetrain-cleaned.webp"
+    alt="Walking robot mk 0.0 drivetrain design"
+    caption="B.A.R.C. Mk 0.0 Drivetrain Design"
+    className="mx-auto max-w-[400px]"
+  />
+</div>
+
+The benefits of this design were that it could walk both forward and backward, relied on only one motor, and that it required a minimal drivetrain. The drawbacks were that it did not have the ability to turn, and was not an original design. This design would serve as a great starting point, but we would need to take it further.
+
+## Design - Mk 0.1
+
+For this iteration, I needed the robot to be able to turn. To accomplish this, I decided to split the robot in half. These symmetrical halves would be connected with a gear centered at the joint. This joint would serve as a point of rotation. A motor connected via a series of gears to the central gear would allow for the robot to pivot, as pictured below.
+
+<div className="my-8 grid gap-4 md:grid-cols-2">
+  <ProjectPhoto
+    src="/images/projects/barc-robot/mk0.1-one-side-cleaned.webp"
+    alt="Walking robot mk 0.1 design"
+    caption="B.A.R.C. Mk 0.1 Body Design (One Side)"
+    className="mx-auto max-w-[400px]"
+  />
+  <ProjectPhoto
+    src="/images/projects/barc-robot/mk0.1-two-sides-cleaned.webp"
+    alt="Walking robot mk 0.1 design with all legs"
+    caption="B.A.R.C. Mk 0.1 Body Design (Both Sides)"
+    className="mx-auto max-w-[400px]"
+  />
+</div>
+
+A goal for this project was to drive the entire robot with only one motor (not including the motor needed to turn the robot). This singular motor would be placed on one half of the robot where it would be directly connected to an axle driving two of the legs. A dogbone joint would be used at the pivot point, allowing for the drivetrain to transfer power from one side of the robot to the other.
+
+<ProjectPhoto
+  src="/images/projects/barc-robot/mk0.1-dogbone-cleaned.webp"
+  alt="Walking robot turning mechanism"
+  caption="B.A.R.C. Mk 0.1 Drivetrain"
+  className="mx-auto max-w-[600px]"
+/>
+
+This design seemed to check all of the right boxes. It could walk forward and backward, turn at the central joint, and still required a relatively minimal drivetrain. This would serve as our project basis.
+
+## Design - Mk 1.0
+
+After presenting my work to the rest of the team, we began work on refining and expanding the design. 
+
+<ProjectPhoto
+  src="/images/projects/barc-robot/mk1.0.gif"
+  alt="Walking robot walking animation"
+  caption="B.A.R.C. Mk 1.0"
+  className="mx-auto max-w-[600px]"
+/>
+
+Updates that were made included adding Jansen Linkage style legs, adding gear reductions to reduce the speed and increase torque, and fully incorporating the drivetrain and steering.
+
+## Electronics
+
+As this project was for a mechanical design class, that was what our team decided to focus on. After some research, our team found that everything required for out robots operation could be sourced from a radio-controlled truck sold at Walmart.
+
+We purchased this RC truck and carefully disassembled it, though not before hitting a few sick jumps with it. From the truck we were able to extract the following:
+
+ - 1 motor for the drivetrain
+ - 1 motor for the steering
+ - 1 receiver module
+ - 1 transmitter module
+ - 1 battery pack
+ - 1 battery charger
+ - 1 spare motor
+
+Together, these components would allow for the truck to be controlled from a distance with the transmitter.
+
+Being able to source all of the electronics from an off-the-shelf RC truck allowed for us to save a lot of time and money, and it ensured that all of the components would work together. This was a great investment for the project.
+
+## Operation
+
+With the electronics selected, the design could be finalized. The final robot would have the following drive modes:
+
+ - Forward
+ - Forward Right
+ - Forward Left
+ - Backward
+ - Backward Right
+ - Backward Left
+
+With the radio controller would allow for live trajectory adjustments, and eliminate the need for additional software.
+
+## Manufacturing
+
+The majority of this robot was 3D-printed using standard PLA filament with a Bambu Lab A1 FDM printer. All 3D-printed components were modeled in Onshape by myself and another team member.
+
+<ProjectPhoto
+  src="/images/projects/barc-robot/printing.webp"
+  alt="Walking robot being 3D-printed"
+  caption="3D-Printing B.A.R.C. Frame"
+  className="mx-auto max-w-[400px]"
+/>
+
+The frame of the robot was printed in two pieces: the front half and the back half. The legs of the robot were printed as individula links, and assembled with pins that were also 3D-printed. Each leg was made of seven links and seven pins, so the total 3D-printed assembly included a total of 28 links, 28 pinks, the front frame and the back frame.
+
+The majority of the gears used in the robot were from a set of Lego style gears which was purchased from Amazon. Purchasing these gears in an off-the-shelf pack meant that all of the gears would be able to mesh properly and helped keep costs down. Some gears from the disassembled RC truck would also be used.
+
+## Challenges and Solutions
+
+Over the course of this project we encountered several unexpected challenges. Each challenge required new ways of thinking and design adjustments. A few of these challenges and our solutions are listed below:
+
+Electronics
+ - Problem - Deciding on electronics and determining how to make them work together proved to be a challenge
+
+ - Solution - We decided to buy an RC truck which already had electronics ready to go which we would disassemble and use for parts
+
+Gear Slippage
+ - Problem - The amount of torque required to drive the legs caused the gears to become misaligned and the drivetrain to fail
+
+ - Solution - We redesigned the chassiswith a more rugged drivetrain support system to ensure gears remained in place
+
+Lack of Servo
+ - Problem - We were hoping the RC truck used for parts would have a servo for steering, unfortunately it only had motors
+
+ - Solution - We designed a steering mechanism that uses the motor to turn a series of gears, essentially acting as a servo
+
+Motor Failure
+ - Problem - Under the large pressures presented in this application, the motors hve been seen to overheat and lose power
+
+ - Solution - We decided the motor should be run for only short periods of time, and replaced when necessary
+
+## Results
+
+<ProjectPhoto
+  src="/images/projects/barc-robot/evolution.webp"
+  alt="Walking robot evolution"
+  caption="B.A.R.C. Evolution"
+  className="mx-auto max-w-[800px]"
+/>
+
+Our team was able to deliver a fully functional and entirely original radio-controlled walking robot. The final design integrated a centralized drivetrain, Jansen-style leg linkages, various electronics, and a custom steering mechanism. Through multiple iterations our team was able to refine and complete the robot.
+
+## Next Steps
+
+I have been independently working on a B.A.R.C. Mk 2.0. For now, this work consists of drafting new designs based on challenges that were encountered with Mk 1.0. I have been conducting technical research, particularly on new gearing systems for the drivetrain, which I plan to implement in Mk 2.0.
+
+## What This Demonstrates
+
+This project showcases my ability to design complex mechanical systems and work within requirments set by a client, delivering a innovative and complete product. This project also displays my ability to get hands-on with CAD design, part fabrication, and integrating mechanical and electrical systems. From beginning to end, every challenge was met head on and our team worked to ensure that an effective and practical solution was implemented. 

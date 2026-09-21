@@ -1,0 +1,127 @@
+---
+title: Arduino Inventory Tracking Robot
+slug: arduino-inventory-robot
+period: { start: "2024-10", end: "2024-12" }
+summary: Designed and assembled an autonomous Arduino-based mobile robot
+  for warehouse inventory tracking.
+cardSkills: [Industrial Design, Systems Engineering, Prototyping, Testing & Validation, •••]
+skills: [Arduino, Industrial Design, Electrical Design, Systems Engineering, Component Selection, Design Analysis, Prototyping, Testing & Validation]
+origin: independent
+tier: project
+order: 1
+featured: true
+detail: true
+coverImage: "/images/projects/arduino-inventory-robot/car-w-boxes-cleaned.webp"
+---
+
+## Overview
+
+Designed and built an autonomous inventory-tracking robot using an Arduino-based control system
+and an Elegoo Smart Robot Car platform. This project was completed by myself and two peers as
+part of a course covering the fundamentals of electronics.
+
+## The Design
+
+For this project, my team was asked to create an autonomous robot with one specific purpose or 
+task, all based on the Elegoo Smart Robot Car platform (pictured below). As these requirements were very broad, 
+our team was very excited with the many possibilities of what we could create. After some
+deliberation, we decided that we should design somethng that could be useful to a company
+in the real world.
+
+<div className="my-8 grid gap-4 md:grid-cols-2">
+  <ProjectPhoto
+    src="/images/projects/arduino-inventory-robot/smart-car-cleaned.webp"
+    alt="Elegoo smart car"
+    caption="The ELEGOO Smart Robot Car Courtesy of ELEGOO"
+    className="mx-auto max-w-[400px]"
+  />
+  <ProjectPhoto
+    src="/images/projects/arduino-inventory-robot/electronics-cleaned.webp"
+    alt="Elegoo smart car electronics"
+    caption="ELEGOO Smart Robot Car Electronics Courtesy of ELEGOO"
+    className="mx-auto max-w-[400px]"
+  />
+</div>
+
+## Limitations and Opportunity
+
+The Elegoo Smart Robot Car platform we were provided with was very limited in terms of sensors
+and it's output. We decided to take an inventory all of the components included in the kit:
+
+Input
+ - Infrared Photoelectric Sensors
+ - Ultrasonic Sensors
+ - Buttons
+
+Output
+ - Motors
+ - Servos
+ - LEDs
+
+After some more thought, I came up with a design that would allow for the robot to be able
+to tell the number of packages in a warehouse by use of the ultrasonic sensor. A diagram of
+this design can be found below.
+
+<ProjectPhoto
+  src="/images/projects/arduino-inventory-robot/car-demo.webp"
+  alt="Animated inventory-tracking robot demo"
+  caption="Demo of Inventory Tracking Method"
+  className="mx-auto max-w-[620px]"
+/>
+
+Essentially, the robot would use the underbody infrared photoelectric 
+sensors to follow a pretermined path. The path would be mapped with a
+black line along the floor of the warehouse. Smaller black lines would
+be placed perpendicularly along the path to signify when the robot 
+should pause and take count of inventory. Again, the infrared 
+photoelectric sensors would be used to determine where these "inventory
+points" are.
+
+While the robot is paused at an inventory point, it would use an
+ultrasonic sensor to determine the distance between itself and the
+nearest box. Using this distance, the robot is able to calculate the
+number of boxes in that row. 
+
+The warehouse is designed in such a way so that every time a box is
+added to the back of the line, the frontmost box is pushed closer to
+the inventory robot. This can be seen in the diagram as the conveyer
+belts at the top of the visualization are adding boxes to the back of
+each line. It is this warehouse design that allows for the robot to
+determine the number of boxes in each row based on proximity.
+
+## The Build
+
+I presented this concept to the team, and they thought it was a great
+idea. 
+
+Over the next several weeks, we built and programmed the robot. Using
+the infrared photoelectric sensors for line following required some
+refinement, as did using the ultrasonic sensor for counting the boxes. 
+Through several iterations, we were able to fine-tune these systems.
+
+To display the number of boxes in each row, we decided to use the
+included LEDs. Each row could hold a maximum of three boxes, and so
+we designed the display output with three LEDs. One LED would light
+up for each box detected in a row.
+
+## Results
+
+<ProjectPhoto
+  src="/images/projects/arduino-inventory-robot/car-w-boxes-cleaned.webp"
+  alt="Completed robot car"
+  caption="Final Product"
+  className="mx-auto max-w-[550px]"
+/>
+
+This project turned out to be a great success. Our team was able to
+turn simple electronics and minimal guidance into a product that
+would actually be useful to a business. In two months we had taken
+this project through the inital concepts and design all the way to 
+a fully functional inventory-tracking robot.
+
+## What This Demonstrates
+
+This project showcases my abilities to work in a team, integrate
+hardware and software, and think outisde of the box. The work
+required an understanding of electronics, programming, industrial
+design, and needs of the industry.
