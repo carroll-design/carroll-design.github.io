@@ -6,8 +6,6 @@
 import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
 import type { AnchorHTMLAttributes, ReactNode } from "react";
-import { NppArchitectureDiagram } from "./figures/NppArchitectureDiagram";
-import { NppResultsTable } from "./figures/NppResultsTable";
 import { ElsaPipelineDiagram } from "./figures/ElsaPipelineDiagram";
 import { AirbnbFeatureImportance } from "./figures/AirbnbFeatureImportance";
 import { AirbnbModelTable } from "./figures/AirbnbModelTable";
@@ -167,8 +165,6 @@ export const mdxComponents: MDXComponents = {
   ),
   // Content figures (see figures/): complex JSX lives in typechecked TSX,
   // not inline MDX, so markdown parsing can never corrupt it.
-  NppArchitectureDiagram,
-  NppResultsTable,
   ElsaPipelineDiagram,
   ProjectPhoto,
   AirbnbFeatureImportance,

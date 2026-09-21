@@ -6,7 +6,6 @@ import {
   getProject,
   getProjects,
   getPublications,
-  getResearchThreads,
   getSite,
 } from "@/lib/content";
 import { Mdx } from "@/lib/mdx";
@@ -33,7 +32,6 @@ const heroLink =
 
 export default function Home() {
   const site = getSite();
-  const research = getResearchThreads().find((t) => t.meta.featured);
   const flagshipProject = getProject("rov");
   const featuredProjects = getProjects().filter(
     (p) => p.meta.featured && p.meta.tier === "project",
@@ -164,23 +162,11 @@ export default function Home() {
         </Section>
       </Reveal>
 
-      {/* Two flagships as full-width split cards; the loudest unit on the
-          page. Scroll signature: rule draws, cards slide in alternating. */}
+      {/* Selected work is the loudest unit on the page. */}
       <Reveal>
         <Section className="py-14 sm:py-16">
           <SectionHeading index="01" title="Selected work" />
           <div className="sd-cards grid gap-5">
-            {research && (
-              <FlagshipCard
-                href={`/research/${research.meta.slug}`}
-                eyebrow="Research"
-                title={research.meta.title}
-                metaLine={`${research.meta.org} · ${formatPeriod(research.meta.period)}`}
-                summary={research.meta.summary}
-                chips={research.meta.methods}
-                chipsLabel="Methods"
-              />
-            )}
             {flagshipProject && (
               <FlagshipCard
                 href={`/projects/${flagshipProject.meta.slug}`}
@@ -227,34 +213,13 @@ export default function Home() {
         </Reveal>
       )}
 
-      {/* Publications, directly under Professional Experience. Two conference posters
-          are among the strongest signals this site carries for the audience
-          the hero pill names, and they used to be reachable only by opening
-          /research and scrolling past the thread card. Cheap to show: at this
-          count the whole list fits, so the homepage carries the real citations
-          rather than a teaser. */}
+      {/* Publications, directly under Professional Experience. */}
       {publications.length > 0 && (
         <Reveal>
           <Section className="py-12">
-            {/* "All publications", matching Projects and News rather than the
-                earlier "Research & publications", which repeated the heading's
-                own word. The label leads the count, exactly as News does (it
-                caps at 5 against 3 items today), so the section reads the same
-                whether or not anything is currently hidden. */}
-            <SectionHeading
-              index="03"
-              title="Publications & Presentations"
-              action={
-                <Link
-                  href="/research#publications"
-                  className="text-sm font-medium text-accent transition-colors duration-[--duration-fast] hover:text-accent-strong"
-                >
-                  All publications →
-                </Link>
-              }
-            />
+            <SectionHeading index="03" title="Publications & Presentations" />
             <div className="sd-rise">
-              <PublicationList publications={publications} limit={4} />
+              <PublicationList publications={publications} />
             </div>
           </Section>
         </Reveal>

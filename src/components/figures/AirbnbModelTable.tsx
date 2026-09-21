@@ -1,7 +1,7 @@
 // Model comparison for the Airbnb price write-up, registered in
 // mdx-components so content/projects/airbnb-knn.mdx can place it. TSX because
 // the MDX pipeline here has no remark-gfm, so a markdown pipe table renders
-// as a literal paragraph of pipe characters (see NppResultsTable).
+// as a literal paragraph of pipe characters.
 //
 // Every row is the same held-out 20% split (random_state=42) over the same
 // ten selected features, so the numbers are comparable across rows. Quoted

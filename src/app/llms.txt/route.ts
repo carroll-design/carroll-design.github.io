@@ -4,7 +4,6 @@ import {
   getOtherExperience,
   getProjects,
   getPublications,
-  getResearchThreads,
   getSite,
 } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
@@ -17,7 +16,6 @@ export const dynamic = "force-static";
 
 export function GET() {
   const site = getSite();
-  const threads = getResearchThreads();
   const projects = getProjects();
   const experience = getExperience();
   const otherExperience = getOtherExperience();
@@ -34,16 +32,10 @@ export function GET() {
     "",
     site.body,
     "",
-    "## Research",
-    "",
-    ...threads.map(
-      ({ meta }) =>
-        `- [${meta.title}](${SITE_URL}/research/${meta.slug}): ${meta.summary}`,
-    ),
     ...(publications.length > 0
       ? [
           "",
-          "### Publications & presentations",
+          "## Publications & presentations",
           "",
           ...publications.map(
             ({ meta }) =>

@@ -16,7 +16,7 @@ const slug = z
   .string()
   .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "expected kebab-case slug");
 
-// content/site.mdx, singleton. Body: research-interest statement (MDX).
+// content/site.mdx, singleton. Body: site introduction (MDX).
 export const siteSchema = z.object({
   name: z.string().min(1),
   // Small-caps identity line above the name (degree · affiliation).
@@ -37,23 +37,6 @@ export const siteSchema = z.object({
     .startsWith("/", "path under /public, e.g. /resume/file.pdf"),
 });
 export type Site = z.infer<typeof siteSchema>;
-
-// content/research/*.mdx, body: the deep write-up (MDX).
-export const researchThreadSchema = z.object({
-  title: z.string().min(1),
-  slug,
-  role: z.string().min(1),
-  org: z.string().min(1),
-  period: z.object({
-    start: yearMonth,
-    end: z.union([yearMonth, z.literal("present")]),
-  }),
-  summary: z.string().min(1),
-  methods: z.array(z.string().min(1)).min(1),
-  order: z.number().int().nonnegative(),
-  featured: z.boolean(),
-});
-export type ResearchThread = z.infer<typeof researchThreadSchema>;
 
 // content/publications/*.mdx, frontmatter only.
 export const publicationSchema = z.object({

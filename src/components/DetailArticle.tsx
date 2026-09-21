@@ -6,9 +6,9 @@ import { MetaChips } from "./MetaChips";
 import { Prose } from "./Prose";
 import { LinkPending } from "./LinkPending";
 
-// Shared layout for research and flagship-project detail pages: eyebrow,
-// serif display title, a definition-list metadata grid, then measured prose.
-// `next` renders a bottom cross-link so long write-ups don't dead-end.
+// Shared layout for detail pages: eyebrow, serif display title, a
+// definition-list metadata grid, then measured prose. `next` renders a
+// bottom cross-link so long write-ups don't dead-end.
 export function DetailArticle({
   eyebrow,
   title,

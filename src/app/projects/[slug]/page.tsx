@@ -4,7 +4,6 @@ import { pageMetadata } from "@/lib/site";
 import {
   getProject,
   getProjectsWithPages,
-  getResearchThreads,
   projectHasPage,
 } from "@/lib/content";
 import { formatPeriod } from "@/lib/format";
@@ -50,25 +49,18 @@ export default async function ProjectPage({
   // Deliberately does not wrap. It used to cycle with a modulo, so the last
   // project sent the reader back to the first with nothing signalling they had
   // come full circle, and projects were the only place the sequence could go.
-  // Running off the end now hands over to the research thread instead, so the
-  // path always moves forward and eventually leaves the section.
+  // Running off the end leaves the section instead of cycling back to the
+  // first project.
   const withPages = getProjectsWithPages();
   const here = withPages.findIndex((p) => p.meta.slug === slug);
   const following = here >= 0 ? withPages[here + 1] : undefined;
-  const featuredThread = getResearchThreads().find((t) => t.meta.featured);
   const next = following
     ? {
         href: `/projects/${following.meta.slug}`,
         eyebrow: following.meta.tier === "flagship" ? "Engineering" : "Project",
         title: following.meta.title,
       }
-    : featuredThread
-      ? {
-          href: `/research/${featuredThread.meta.slug}`,
-          eyebrow: "Research",
-          title: featuredThread.meta.title,
-        }
-      : undefined;
+    : undefined;
 
   const metaRows = [
     ...(meta.role ? [{ label: "Role", value: meta.role }] : []),

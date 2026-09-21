@@ -4,7 +4,6 @@ import {
   getNews,
   getExperienceWithPages,
   getProjectsWithPages,
-  getResearchThreads,
 } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 
@@ -26,11 +25,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/news`, lastModified: latestNews },
     { url: `${SITE_URL}/resume`, lastModified: buildDate },
   ];
-
-  const research: MetadataRoute.Sitemap = getResearchThreads().map((t) => ({
-    url: `${SITE_URL}/research/${t.meta.slug}`,
-    lastModified: buildDate,
-  }));
 
   const projectPages: MetadataRoute.Sitemap = getProjectsWithPages().map(
     (p) => ({
@@ -61,7 +55,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     ...staticRoutes,
-    ...research,
     ...projectPages,
     ...experiencePages,
     ...leadershipPages,

@@ -8,14 +8,12 @@ import {
   newsItemSchema,
   projectSchema,
   publicationSchema,
-  researchThreadSchema,
   siteSchema,
   type Resume,
   type Experience,
   type NewsItem,
   type Project,
   type Publication,
-  type ResearchThread,
   type Site,
 } from "@/content/schema";
 
@@ -78,8 +76,11 @@ function loadDir<S extends z.ZodType>(
   schema: S,
   dir: string,
 ): Entry<z.output<S>>[] {
+  const directory = path.join(CONTENT_DIR, dir);
+  if (!fs.existsSync(directory)) return [];
+
   return fs
-    .readdirSync(path.join(CONTENT_DIR, dir))
+    .readdirSync(directory)
     .filter((f) => f.endsWith(".md") || f.endsWith(".mdx"))
     .map((f) => load(schema, `${dir}/${f}`));
 }
@@ -90,18 +91,6 @@ export function getSite(): Entry<Site> {
 
 export function getResume(): Entry<Resume> {
   return load(resumeSchema, "resume.mdx");
-}
-
-export function getResearchThreads(): Entry<ResearchThread>[] {
-  return loadDir(researchThreadSchema, "research").sort(
-    (a, b) => a.meta.order - b.meta.order,
-  );
-}
-
-export function getResearchThread(
-  slug: string,
-): Entry<ResearchThread> | undefined {
-  return getResearchThreads().find((t) => t.meta.slug === slug);
 }
 
 export function getPublications(): Entry<Publication>[] {

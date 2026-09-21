@@ -18,7 +18,7 @@ export const SITE_NAME = "Cameron Carroll";
 export const SITE_DESCRIPTION =
   "Aerospace and mechanical engineering student at New Mexico State University: ROVs, avionics, and flight systems.";
 
-/** Absolute URL for a site-relative path ("/research/x" -> full URL). */
+/** Absolute URL for a site-relative path. */
 export function absoluteUrl(path: string): string {
   return `${SITE_URL}${path}`;
 }

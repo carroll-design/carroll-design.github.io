@@ -7,7 +7,6 @@ import {
   getLeadershipWithPages,
   getNews,
   getProjectsWithPages,
-  getResearchThreads,
   getSite,
 } from "@/lib/content";
 import { NAV_LINKS } from "@/lib/nav";
@@ -24,11 +23,6 @@ function buildCommands(): Command[] {
       group: "Navigate",
       label: l.label,
       href: l.href,
-    })),
-    ...getResearchThreads().map((t) => ({
-      group: "Work",
-      label: t.meta.title,
-      href: `/research/${t.meta.slug}`,
     })),
     // Every project that has a page, not just the flagship. This filtered on
     // tier === "flagship" back when ELSA was the only write-up that existed,
