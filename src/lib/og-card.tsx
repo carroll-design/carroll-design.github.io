@@ -1,10 +1,10 @@
 import { ImageResponse } from "next/og";
 
-// Shared OG-card system: warm paper, hairline print-mat frame, Newsreader
-// display type, the site's brand at link-preview size. Two layouts:
+// Shared OG-card system: warm paper, hairline print-mat frame, and the site's
+// brand at link-preview size. Two layouts:
 //   brandCard()             site-wide default (name + tagline)
 //   articleCard({ ... })    per-write-up (eyebrow + title)
-// Fonts are fetched at build time and subset to the glyphs actually used.
+// Keep generation self-contained so static builds do not depend on font hosts.
 
 export const OG_SIZE = { width: 1200, height: 630 };
 
@@ -16,18 +16,6 @@ const INK_FAINT = "#767065";
 const LINE = "#e2ddd3";
 const LINE_STRONG = "#cfc9bd";
 const ACCENT = "#b4552d";
-
-async function loadGoogleFont(family: string, text: string) {
-  const url = `https://fonts.googleapis.com/css2?family=${family}&text=${encodeURIComponent(text)}`;
-  const css = await (await fetch(url)).text();
-  const resource = css.match(
-    /src: url\((.+?)\) format\('(opentype|truetype)'\)/,
-  );
-  if (!resource) throw new Error(`OG font fetch failed for ${family}`);
-  const res = await fetch(resource[1]);
-  if (!res.ok) throw new Error(`OG font download failed for ${family}`);
-  return res.arrayBuffer();
-}
 
 // Takes explicit top/bottom nodes (not a fragment), satori flattens
 // fragments unpredictably inside flex containers.
@@ -84,14 +72,8 @@ function footer(left: string) {
   );
 }
 
-async function toResponse(node: React.ReactElement, serifText: string) {
-  const newsreader = await loadGoogleFont("Newsreader:wght@500", serifText);
-  return new ImageResponse(node, {
-    ...OG_SIZE,
-    fonts: [
-      { name: "Newsreader", data: newsreader, style: "normal", weight: 500 },
-    ],
-  });
+function toResponse(node: React.ReactElement) {
+  return new ImageResponse(node, OG_SIZE);
 }
 
 export function brandCard() {
@@ -111,7 +93,6 @@ export function brandCard() {
         <div
           style={{
             fontSize: 96,
-            fontFamily: "Newsreader",
             fontWeight: 500,
             color: INK_STRONG,
             letterSpacing: "-0.02em",
@@ -133,7 +114,6 @@ export function brandCard() {
       </div>,
       footer("New Mexico State University"),
     ),
-    NAME,
   );
 }
 
@@ -178,7 +158,6 @@ export function articleCard({
         <div
           style={{
             fontSize: 62,
-            fontFamily: "Newsreader",
             fontWeight: 500,
             color: INK_STRONG,
             letterSpacing: "-0.02em",
@@ -191,6 +170,5 @@ export function articleCard({
       </div>,
       footer("Cameron Carroll"),
     ),
-    `${title}Cameron Carroll`,
   );
 }
