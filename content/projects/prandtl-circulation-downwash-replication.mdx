@@ -1,0 +1,155 @@
+---
+title: Prandtl Ciculation & Downwash Distribution Reconstruction
+slug: prandtl-reconstruction
+period: { start: "2026-09", end: "2026-09"}
+summary: Recreated Prandtl's 1933 circulation-distribution and downwash figure in MATLAB using his published aerodynamic equations.
+cardSkills: [MATLAB, Aerodynamic Analysis, Mathematical Modeling, Technical Research]
+skills: [MATLAB, Aerodynamic Analysis, Mathematical Modeling, Technical Research]
+origin: independent
+tier: project
+order: 1
+featured: true
+detail: true
+coverImage: "/images/projects/prandtl-circulation-downwash-replication/cover-cleaned.webp"
+---
+
+## Overview
+
+This project reconstructs Figure 1 from Ludwig Prandtl's 1933 paper, "Über Tragflügel kleinsten induzierten
+Widerstandes" using MATLAB. Prandtl's work examines how the spanwise distribution of lift impacts induced drag
+when both the total lift and the moment of intertia of lift distribution are constrained. Pradntl proposed
+that the best way to minimize induced drag was by the use of a bell-shaped wing loading, and not the
+traditional elliptical distribution.
+
+The purpose of the project was to use modern computational methods to recreate Prandtl's original plots
+of circulation and downwash from the 1933 paper.
+
+## Core concepts
+
+Typically, the wings of an aircraft are limited in length. This could be for a number of reasons. For example,
+a plane might need to be stored in a hangar with doors of a certain size. In this case, it has been established
+that an elliptical lift distribution is the most effective way to minimize induced drag.
+
+Prandtl's 1933 work focused on producing the minimum induced drag for a given lift and radius of gyration, allowing
+for the wing span to vary as needed.
+
+## Prandtl's Original Figure
+
+The original figure is made up of two graphs: the upper depicts circulation distribution while the lower depicts
+downwash distribution.
+
+<ProjectPhoto
+  src="/images/projects/prandtl-circulation-downwash-replication/figure1-cleaned.webp"
+  alt="Prandtl Original Figure 1"
+  caption="Prandtl's Original Figure"
+  className="mx-auto max-w-[500px]"
+/>
+
+Each graph contains curves a, b, and c which model the elliptical, intermediate, and optimum
+distribution cases respecively. Each of these curves is directly dependent on the value of the parameter μ.
+
+
+## Code Structure
+
+The MATLAB program is organized into four main sections: setting parameters, calculating the distributions,
+creating the figure, and adding annotations as seen in Prandtl's original figure.
+
+## I. Setting parameters
+
+First, the code defines values which will be used throughout the rest of the program:
+
+```matlab
+r = 1;
+Gamma0 = 1;
+mu_values = [ 0 0.5 1];
+```
+
+r - radius of gyradion of the lift distribution  
+Γ₀ - circulation magnitude  
+μ - dimensionless parameter controlling the shape of the circulation distribution
+
+## II. Calculating the distributions
+
+A "for" loop is used to calculate each of the three cases separately.
+
+Solving for wing span:
+
+```matlab
+b = 4*r*sqrt((1-mu/4)/(1-mu/2));
+```
+
+This calculates the wingspan b for each case. This equation comes from Prandtl's relationship between the
+span and radius of gyration.
+
+Solving for spanwise position:
+
+```matlab
+x_all(i,:) = linspace(0,b/2,100);
+xi_all(i,:) = 2*x_all(i,:)/b;
+```
+
+These lines create 100 points from the wing center to the wingtip, and convert them into the normalized
+spanwise coordinate ξ.
+
+Solving for circulation:
+
+```matlab
+Gamma_all(i,:) = Gamma0*(1-mu*xi_all(i,:).^2).*sqrt(1-xi_all(i,:).^2);
+```
+
+This is Prandtl's circulation equation. Here, it is used to determine the shape of the curves in the upper
+circulation plot.
+
+Solving for downwash:
+
+```matlab
+w_all(i,:) = (Gamma0/(2*b))*(1+mu/2-3*mu*xi_all(i,:).^2);
+```
+
+This is Prandtl's downwash equation. Here, it is used to determine the shape of the curves in the lower
+downwash plot.
+
+III. Creating the Figure
+
+Once all necessary values have been calculated, two plots are created: circulation (the upper plot) and downwash
+(the lower plot). On each plot, all of the three cases are depicted, consistent with Prandtl's original figure.
+
+IV. Adding Annotations
+
+The rest of the program is dedicated to reorganizing the plots and recreating the visual features found in
+the original figure. Some of these visual changes include:
+
+ - A dashed centerline
+ - A dashed x = r reference lines
+ - Wingtip reference lines
+ - An r dimension bracket
+ - a, b, and c labels for the three cases
+ - Γ and w labels
+
+These changes were made strictly for the purpose of making the reconstructed figure allign visually with the
+original. None of these changes in any way altered the results of the calculations or plots.
+
+## Results
+
+The MATLAB programn successfully reproduced the three circulation and downwash distributions shown in Prandtl's
+original Figure 1.
+
+<ProjectPhoto
+  src="/images/projects/prandtl-circulation-downwash-replication/cover-cleaned.webp"
+  alt="Prandtl Original Figure and Reconstructed Figure"
+  caption="Prandtl's Original Figure and Reconstructed Figure"
+  className="mx-auto max-w-[700px]"
+/>
+
+The reconstructed curves allign with the those found in Prandtl's original figure. The program also accounts for
+the changing wing span for each value of μ. This allows for the same radius of gyration to be used when 
+reproducing the different distributions.
+
+Overall, the results demonstrate that the MATLAB program was successful in recreating the aerodynamic behavior
+descibed by Prandtl.
+
+## What This Demonstrates.
+
+This project gave me hands-on experience applying aerodynamic theory through mathematical modeling. The work required
+reading Prandtl's full work on bell-shaped wing loading, translating the presented aerodynamic equations into code,
+and recreating the two plots to better analyze both the circulation and downwash distributions.
