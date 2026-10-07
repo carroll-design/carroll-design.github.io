@@ -34,7 +34,7 @@ export default function Home() {
   const site = getSite();
   const flagshipProject = getProject("rov");
   const featuredProjects = getProjects().filter(
-    (p) => p.meta.featured && p.meta.tier === "project",
+    (p) => p.meta.featured && !p.meta.flagship,
   );
   const professionalExperience = getExperience();
   const publications = getPublications();

@@ -2,6 +2,7 @@ import {
   getNews,
   getExperience,
   getOtherExperience,
+  getLeadership,
   getProjects,
   getPublications,
   getSite,
@@ -19,9 +20,9 @@ export function GET() {
   const projects = getProjects();
   const experience = getExperience();
   const otherExperience = getOtherExperience();
-  const flagships = projects.filter((p) => p.meta.tier === "flagship");
-  const regular = projects.filter((p) => p.meta.tier === "project");
-  const leadership = projects.filter((p) => p.meta.tier === "leadership");
+  const flagships = projects.filter((p) => p.meta.flagship);
+  const regular = projects.filter((p) => !p.meta.flagship);
+  const leadership = getLeadership();
   const publications = getPublications();
   const news = getNews();
 

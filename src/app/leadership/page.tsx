@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/site";
-import { getProjects } from "@/lib/content";
+import { getLeadership } from "@/lib/content";
 import { PageHeader } from "@/components/PageHeader";
 import { Section } from "@/components/Section";
 import { Reveal } from "@/components/Reveal";
@@ -14,7 +14,7 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function LeadershipPage() {
-  const leadership = getProjects().filter((p) => p.meta.tier === "leadership");
+  const leadership = getLeadership();
 
   return (
     <>

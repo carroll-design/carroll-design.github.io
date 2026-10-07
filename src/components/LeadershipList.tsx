@@ -1,13 +1,13 @@
 import Link from "next/link";
-import type { Project } from "@/content/schema";
+import type { Leadership } from "@/content/schema";
 import { leadershipHasPage } from "@/lib/content";
 import { formatPeriod } from "@/lib/format";
 import { ArrowRightIcon } from "./icons";
 
-// Compact list for leadership-tier entries, supporting detail, not cards that
+// Compact list for leadership entries, supporting detail, not cards that
 // compete with the technical work for attention. An entry that has opted into
 // its own write-up (detail: true) links to it; the rest are plain rows.
-export function LeadershipList({ items }: { items: { meta: Project }[] }) {
+export function LeadershipList({ items }: { items: { meta: Leadership }[] }) {
   if (items.length === 0) return null;
   return (
     <ul data-animate="rows" className="divide-y divide-line">

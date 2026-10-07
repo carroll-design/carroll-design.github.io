@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { pageMetadata } from "@/lib/site";
 import {
   getLeadershipWithPages,
-  getProject,
+  getLeadershipItem,
   leadershipHasPage,
 } from "@/lib/content";
 import { formatPeriod } from "@/lib/format";
@@ -25,7 +25,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const entry = getProject(slug);
+  const entry = getLeadershipItem(slug);
   if (!entry) return {};
   return pageMetadata({
     title: entry.meta.title,
@@ -41,7 +41,7 @@ export default async function LeadershipDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const entry = getProject(slug);
+  const entry = getLeadershipItem(slug);
   if (!entry || !leadershipHasPage(entry.meta)) notFound();
 
   const { meta, body } = entry;

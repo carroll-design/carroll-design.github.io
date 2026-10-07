@@ -5,9 +5,8 @@ import { formatPeriod } from "@/lib/format";
 import { MetaChips } from "./MetaChips";
 import { ArrowRightIcon } from "./icons";
 
-// Card for regular (non-flagship) projects, self-contained, with optional
-// external links. Flagship work renders as FlagshipCard; leadership entries
-// as LeadershipList.
+// Card for regular (non-flagship) projects and experience entries, with
+// optional external links. Flagship work renders as FlagshipCard.
 export function ProjectCard({
   project,
   eyebrow,
@@ -34,7 +33,7 @@ export function ProjectCard({
   const href =
     hrefOverride !== undefined
       ? hrefOverride
-      : "tier" in project && projectHasPage(project)
+      : "flagship" in project && projectHasPage(project)
         ? `/projects/${project.slug}`
         : null;
 

@@ -17,7 +17,7 @@ export const metadata: Metadata = pageMetadata({
   path: "/projects",
 });
 
-// Project-tier cards are grouped by where the work came from, so a reader can
+// Non-flagship project cards are grouped by where the work came from, so a reader can
 // tell a weekend build from a semester of coursework without reading five
 // cards to find out. Hackathon and independent share a section: both are work
 // chosen rather than assigned, and independent has no entries yet, so its own
@@ -36,15 +36,15 @@ const GROUPS: { title: string; origins: readonly Project["origin"][] }[] = [
 
 export default function ProjectsPage() {
   const projects = getProjects();
-  const flagship = projects.filter((p) => p.meta.tier === "flagship");
-  const regular = projects.filter((p) => p.meta.tier === "project");
+  const flagship = projects.filter((p) => p.meta.flagship);
+  const regular = projects.filter((p) => !p.meta.flagship);
 
   const grouped = GROUPS.map((group) => ({
     ...group,
     items: regular.filter((p) => group.origins.includes(p.meta.origin)),
   }));
 
-  // The schema guarantees every displayed project-tier entry has an origin,
+  // The schema guarantees every displayed non-flagship entry has an origin,
   // but not that GROUPS covers it. Professional entries are displayed on the
   // dedicated /experience page instead. Fail the build for any other orphan.
   const placed = new Set(

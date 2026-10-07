@@ -5,12 +5,14 @@ import type { z } from "zod";
 import {
   resumeSchema,
   experienceSchema,
+  leadershipSchema,
   newsItemSchema,
   projectSchema,
   publicationSchema,
   siteSchema,
   type Resume,
   type Experience,
+  type Leadership,
   type NewsItem,
   type Project,
   type Publication,
@@ -109,6 +111,16 @@ export function getProject(slug: string): Entry<Project> | undefined {
   return getProjects().find((p) => p.meta.slug === slug);
 }
 
+export function getLeadership(): Entry<Leadership>[] {
+  return loadDir(leadershipSchema, "leadership").sort(
+    (a, b) => a.meta.order - b.meta.order,
+  );
+}
+
+export function getLeadershipItem(slug: string): Entry<Leadership> | undefined {
+  return getLeadership().find((entry) => entry.meta.slug === slug);
+}
+
 export function getExperience(): Entry<Experience>[] {
   return loadDir(experienceSchema, "experience").sort(
     (a, b) => a.meta.order - b.meta.order,
@@ -146,8 +158,7 @@ export function getExperienceWithPages(): Entry<Experience>[] {
  * Leadership entries never get one; they live as rows on /leadership.
  */
 export function projectHasPage(meta: Project): boolean {
-  if (meta.tier === "leadership") return false;
-  return meta.tier === "flagship" || meta.detail;
+  return meta.flagship || meta.detail;
 }
 
 /** Projects with their own page, in display order. */
@@ -164,13 +175,13 @@ export function getProjectsWithPages(): Entry<Project>[] {
  * already does is worse than no link. Set `detail: true` in the same change
  * that writes the body.
  */
-export function leadershipHasPage(meta: Project): boolean {
-  return meta.tier === "leadership" && meta.detail;
+export function leadershipHasPage(meta: Leadership): boolean {
+  return meta.detail;
 }
 
 /** Leadership entries with their own page, in display order. */
-export function getLeadershipWithPages(): Entry<Project>[] {
-  return getProjects().filter((p) => leadershipHasPage(p.meta));
+export function getLeadershipWithPages(): Entry<Leadership>[] {
+  return getLeadership().filter((entry) => leadershipHasPage(entry.meta));
 }
 
 export function getNews(): Entry<NewsItem>[] {

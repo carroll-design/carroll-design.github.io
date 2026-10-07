@@ -12,8 +12,7 @@ import { ArticleJsonLd } from "@/components/ArticleJsonLd";
 import { externalRow } from "@/components/metaRows";
 
 // Detail pages exist for flagship work and for any project that has opted in
-// (see projectHasPage). Gated on the content being worth the click, not on
-// tier, so pages appear as each project's write-up is finished.
+// (see projectHasPage). Other projects get pages when their write-up is ready.
 export function generateStaticParams() {
   return getProjectsWithPages().map((p) => ({ slug: p.meta.slug }));
 }
@@ -57,7 +56,7 @@ export default async function ProjectPage({
   const next = following
     ? {
         href: `/projects/${following.meta.slug}`,
-        eyebrow: following.meta.tier === "flagship" ? "Engineering" : "Project",
+        eyebrow: following.meta.flagship ? "Engineering" : "Project",
         title: following.meta.title,
       }
     : undefined;

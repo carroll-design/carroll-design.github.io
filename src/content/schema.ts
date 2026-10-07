@@ -50,13 +50,12 @@ export const publicationSchema = z.object({
 });
 export type Publication = z.infer<typeof publicationSchema>;
 
-// content/projects/*.mdx, body required for flagship tier (deep write-up,
-// rendered at /projects/[slug]); optional short paragraphs otherwise.
+// content/projects/*.mdx, body required when a detail page is enabled.
 export const projectSchema = z
   .object({
     title: z.string().min(1),
     slug,
-    role: z.string().min(1).optional(), // mainly for leadership entries
+    role: z.string().min(1).optional(),
     period: z.object({
       start: yearMonth,
       end: z.union([yearMonth, z.literal("present")]).optional(),
@@ -77,31 +76,48 @@ export const projectSchema = z
         instagram: z.url().optional(),
       })
       .optional(),
-    tier: z.enum(["flagship", "project", "leadership"]),
+    flagship: z.boolean().default(false),
     order: z.number().int().nonnegative(),
     featured: z.boolean(),
     // Opt a project into its own page at /projects/<slug>. Flagship work always
-    // has one; every other project gets one as soon as its body is worth the
-    // click. Left false while the body is still a couple of sentences, because
-    // a page that says less than the card is worse than no link at all. Set it
-    // in the same change that writes the real body.
+    // has one; other projects get one when the body is worth the click.
     detail: z.boolean().default(false),
-    // Where the work came from. /projects groups project-tier cards by this.
-    // Flagship work renders in its own block above the groups, and leadership
-    // entries render as rows on /leadership.
+    // Where non-flagship work came from; /projects groups these cards by origin.
     origin: z.enum(["course", "hackathon", "independent"]).optional(),
   })
-  .refine((p) => p.tier !== "project" || p.origin !== undefined, {
+  .refine((p) => p.flagship || p.origin !== undefined, {
     // Without this the failure is silent and nasty: a project missing an origin
     // matches no group on /projects and simply does not render, with nothing
     // anywhere saying so. Fail the build instead.
     path: ["origin"],
     message:
-      'tier "project" requires an origin ("course", "hackathon", "independent"), ' +
-      "because /projects groups cards by it and an " +
-      "unmatched project renders in no section at all",
+      'non-flagship projects require an origin ("course", "hackathon", "independent"), ' +
+      "because /projects groups cards by it and an unmatched project " +
+      "renders in no section at all",
   });
 export type Project = z.infer<typeof projectSchema>;
+
+// content/leadership/*.mdx, separate from project entries.
+export const leadershipSchema = z.object({
+  title: z.string().min(1),
+  slug,
+  role: z.string().min(1).optional(),
+  period: z.object({
+    start: yearMonth,
+    end: z.union([yearMonth, z.literal("present")]).optional(),
+  }),
+  summary: z.string().min(1),
+  coverImage: z.string().startsWith("/", "path under /public").optional(),
+  links: z
+    .object({
+      demo: z.url().optional(),
+      instagram: z.url().optional(),
+    })
+    .optional(),
+  order: z.number().int().nonnegative(),
+  detail: z.boolean().default(false),
+});
+export type Leadership = z.infer<typeof leadershipSchema>;
 
 // content/experience/*.mdx, body rendered at /experience/[slug].
 export const experienceSchema = z.object({

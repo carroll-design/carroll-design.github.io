@@ -24,11 +24,8 @@ function buildCommands(): Command[] {
       label: l.label,
       href: l.href,
     })),
-    // Every project that has a page, not just the flagship. This filtered on
-    // tier === "flagship" back when ELSA was the only write-up that existed,
-    // and never grew with the content: by the time there were six project
-    // pages the palette could still only reach one of them. Deriving from the
-    // same helper the route and the sitemap use means it cannot drift again.
+    // Every project with a page, not just the flagship. Deriving from the same
+    // helper as the route and sitemap means it cannot drift again.
     ...getProjectsWithPages().map((p) => ({
       group: "Work",
       label: p.meta.title,

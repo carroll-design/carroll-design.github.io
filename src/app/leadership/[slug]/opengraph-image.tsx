@@ -1,4 +1,4 @@
-import { getLeadershipWithPages, getProject } from "@/lib/content";
+import { getLeadershipWithPages, getLeadershipItem } from "@/lib/content";
 import { articleCard, OG_SIZE } from "@/lib/og-card";
 
 // Per-entry OG card for leadership write-ups, on the same print-mat frame as
@@ -21,7 +21,7 @@ export default async function OgImage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const entry = getProject(slug);
+  const entry = getLeadershipItem(slug);
   return articleCard({
     eyebrow: "Leadership",
     title: entry?.meta.title ?? "Leadership",
