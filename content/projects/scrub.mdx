@@ -1,0 +1,136 @@
+---
+title: SCRUB - Metadata Remover & Image File Converter
+slug: scrub
+period: { start: "2026-09", end: "2026-09"}
+summary: Conceptualized, designed, and created a browser-based tool to remove metadata from images, also allowing for file type conversions and image editing.
+cardSkills: [Software Development, Cybersecurity, Problem Identification, Testing & Validation, •••]
+skills: [Software Development, Cybersecurity, Problem Identification, Solution Development, Technical Communication, Testing & Validation]
+origin: independent
+order: 4
+featured: false
+detail: true
+coverImage: "/images/projects/scrub/scrub-cleaned.webp"
+---
+
+## Overview
+
+Conceptualized, designed, and created a browser-based tool to remove metadata from images also allowing for file type
+conversions and image editing. This tool was created in collaboration with Claude AI.
+
+## Identifying the Problem
+
+While creating my portfolio website, I began to upload photos I had taken of various projects. It occurred to me that these photos
+contain sensitive information, including the location, time, and even information about the device that took the photo.
+
+## Metadata
+
+There is quite a bit of metadata typically contained in images. These commonly include device info, exposure info, optics info,
+image info, date and GPS info, date and time info, and more. For privacy and cybersecurity, the most important of these are the device info,
+GPS info, and date and time info.
+
+Device info typically includes the make, model, software, and even serial number. This info can tell us a lot about a device,
+and even trace back to the person who owns that device. Given both the software version and date recorded in the metadata,
+we can also tell whether the device is out of date, and therefore more at risk from cyber attacks.
+
+<div className="my-8 grid gap-4 md:grid-cols-2">
+  <ProjectPhoto
+    src="/images/projects/scrub/device-cleaned.webp"
+    alt="Device info metadata"
+    caption="Device info metadata example"
+    className="mx-auto max-w-[400px]"
+  />
+  <ProjectPhoto
+    src="/images/projects/scrub/software-version-cleaned.webp"
+    alt="Device software version metadata example"
+    caption="Device software version metadata example"
+    className="mx-auto max-w-[400px]"
+  />
+</div>
+
+The GPS info, measured in degrees, minutes, and seconds (DMS), records the latitude, longitude, and altitude of an image. Together,
+these describe the exact location of the device at the time the photo was taken.
+
+<ProjectPhoto
+  src="/images/projects/scrub/gps-cleaned.webp"
+  alt="GPS metadata example"
+  caption="GPS metadata example"
+  className="mx-auto max-w-[500px]"
+/>
+
+Date and time info records the exact moment the image was captured. In combination with the GPS metadata, we can see exactly where
+someone was, and when they were there.
+
+<ProjectPhoto
+  src="/images/projects/scrub/date-created-cleaned.webp"
+  alt="Date and time metadata example"
+  caption="Date and time metadata example"
+  className="mx-auto max-w-[500px]"
+/>
+
+Cybersecurity is something that should be taken very seriously. If not properly redacted, this info could reveal a person's devices, whereabouts, and even
+their home. Not only does this metadata put the photographer at risk, but also anyone else in or around the photo. For example, if you took a photo at a relative's house,
+now the location of that house is recorded within the image file.
+
+## The Solution
+
+To resolve this issue, I designed a metadata removal tool. This tool is designed to work in browser and entirely locally, ensuring that files you upload to the program
+never leave your computer.
+
+<ProjectPhoto
+  src="/images/projects/scrub/scrub-cleaned.webp"
+  alt="Scrub program"
+  caption="Scrub program"
+  className="mx-auto max-w-[700px]"
+/>
+
+The program allows for the user to upload image files in JPEG, PNG, WebP, AVIF, BMP, and HEIC/HEIF formats.
+Once a file is uploaded, the program decodes the image into raw pixels. Then, the entire image is redrawn onto
+a blank canvas. This ensures that there are no remnants of the original metadata, as it is now an entirely
+new file. Once rewritten, the image or images can be downloaded.
+
+This program allows for the user to quickly and easily scrub image files of any metadata, and even allows
+for bulk image scrubbing.
+
+## Additional Capabilities
+
+This program is also capable of converting image files to different file formats. The user can select their format of choice from a dropdown above the upload box.
+
+<ProjectPhoto
+  src="/images/projects/scrub/format-cleaned.webp"
+  alt="Scrub format selector"
+  caption="Scrub format selector"
+  className="mx-auto max-w-[700px]"
+/>
+
+If the chosen file format is changed, all images uploaded to the program in that session will be rewritten in the new format. By default,
+the program will retain the original file format.
+
+The program also allows for the user to edit the image file. Editing functionality includes renaming the file, rotating the image, and cropping
+the image.
+
+<ProjectPhoto
+  src="/images/projects/scrub/rename-cleaned.webp"
+  alt="Scrub file renaming functionality"
+  caption="Scrub file renaming functionality"
+  className="mx-auto max-w-[700px]"
+/>
+
+<ProjectPhoto
+  src="/images/projects/scrub/crop-cleaned.webp"
+  alt="Scrub image cropping functionality"
+  caption="Scrub image cropping functionality"
+  className="mx-auto max-w-[700px]"
+/>
+
+Any edits made to the image file can be saved or discarded. Saved edits are reflected in the file preview window within the program, and are
+of course carried over into the final file once downloaded.
+
+## What This Demonstrates
+
+This program illustrates my ability to identify a real security problem, and create a practical solution. After realizing that my photos contained sensitive device, location,
+and timestamp data, I created a browser-based metadata removal tool using HTML, CSS, and JavaScript. Additionally, this program demonstrates my ability to design an intuitive UI, and think ahead by
+implementing features the end user will likely desire. 
+
+Finally, this program exhibits my ability to work with Artificial Intelligence. When it comes to using AI, I always
+work to ensure that I remain in the driver's seat. I design the program, UI, and all of the main features, and describe exactly where everything should be to the Artificial Intelligence.
+In this way, I am ensuring that there is no guesswork, and that the end result is truly what I had envisioned.
